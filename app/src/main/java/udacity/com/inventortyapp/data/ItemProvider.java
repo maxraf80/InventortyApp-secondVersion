@@ -38,8 +38,7 @@ public class ItemProvider extends ContentProvider {
         switch (match) {
 
             case ITEMS:
-                cursor = database.query(ItemContract.ItemEntry.TABLE_NAME, projection, selection, selectionArgs,
-                        null, null, sortOrder);
+                cursor = database.query(ItemContract.ItemEntry.TABLE_NAME, projection, selection, selectionArgs,   null, null, sortOrder);
                 break;
 
             case ITEM_ID:
@@ -91,12 +90,17 @@ public class ItemProvider extends ContentProvider {
         Integer units = Integer.parseInt(values.getAsString(ItemContract.ItemEntry.COLUMN_ITEM_UNITS));
         if (units <0) {  throw new IllegalArgumentException("Units needs to be defined");   }
 
-        String suplier = values.getAsString(ItemContract.ItemEntry.COLUMN_ITEM_SUPLIER);
+        String suplier = values.getAsString(ItemContract.ItemEntry.COLUMN_ITEM_SUPPLIER);
         if (suplier == null) {
             throw new IllegalArgumentException("Suplier cannot be an empty field");
         }
 
-        String email = values.getAsString(ItemContract.ItemEntry.COLUMN_ITEM_SUPLIER);
+        String photo = values.getAsString(ItemContract.ItemEntry.COLUMN_ITEM_PHOTO);
+        if (photo == null) {
+            throw new IllegalArgumentException("Item needs a photo");
+        }
+
+        String email = values.getAsString(ItemContract.ItemEntry.COLUMN_ITEM_SUPPLIER);
         if (email == null) {
             throw new IllegalArgumentException("Suplier cannot be an empty field");
         }
@@ -151,10 +155,19 @@ public class ItemProvider extends ContentProvider {
             }
         }
 
-        if (values.containsKey((ItemContract.ItemEntry.COLUMN_ITEM_SUPLIER))) {
-            String suplier = values.getAsString(ItemContract.ItemEntry.COLUMN_ITEM_SUPLIER);
+
+
+        if (values.containsKey((ItemContract.ItemEntry.COLUMN_ITEM_SUPPLIER))) {
+            String suplier = values.getAsString(ItemContract.ItemEntry.COLUMN_ITEM_SUPPLIER);
             if (suplier == null) {
                 throw new IllegalArgumentException("Suplier needs to be defined");
+            }
+        }
+
+        if (values.containsKey((ItemContract.ItemEntry.COLUMN_ITEM_PHOTO))) {
+            String photo = values.getAsString(ItemContract.ItemEntry.COLUMN_ITEM_PHOTO);
+            if (photo == null) {
+                throw new IllegalArgumentException("Item needs a photo");
             }
         }
 

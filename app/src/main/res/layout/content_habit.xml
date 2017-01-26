@@ -165,7 +165,7 @@
                 android:paddingTop="15dp">
 
                 <EditText
-                    android:id="@+id/suplier"
+                    android:id="@+id/supplier"
                     style="@style/EditorFieldStyle"
                     android:hint="@string/name"
                     android:inputType="text"

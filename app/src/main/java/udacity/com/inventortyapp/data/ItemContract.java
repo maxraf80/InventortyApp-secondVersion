@@ -26,7 +26,7 @@ public class ItemContract {
         public final static String COLUMN_ITEM_PRICE = "price";
         public final static String COLUMN_ITEM_UNITS = "units";
         public final static String COLUMN_ITEM_PHOTO = "photo";
-        public final static String COLUMN_ITEM_SUPLIER = "suplier";
+        public final static String COLUMN_ITEM_SUPPLIER = "supplier";
         public final static String COLUMN_ITEM_EMAIL = "email";
 
         public static final int CATEGORY_UNKNOWN = 0;

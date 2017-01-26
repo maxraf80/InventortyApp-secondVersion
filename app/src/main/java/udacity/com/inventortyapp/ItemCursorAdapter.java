@@ -40,7 +40,7 @@ public class ItemCursorAdapter extends CursorAdapter {
         TextView categoryTextView = (TextView) view.findViewById(R.id.category_cursor);
         TextView priceTextView = (TextView) view.findViewById(R.id.price_cursor);
     final TextView unitsTextView = (TextView) view.findViewById(R.id.units_cursor);
-        TextView suplierTextView = (TextView) view.findViewById(R.id.suplier_cursor);
+        TextView supplierTextView = (TextView) view.findViewById(R.id.supplier_cursor);
         TextView emailTextView = (TextView) view.findViewById(R.id.email_cursor);
         Button mSellButton = (Button) view.findViewById(R.id.track_sale);
 
@@ -52,7 +52,7 @@ public class ItemCursorAdapter extends CursorAdapter {
         int categoryColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_CATEGORY);
         int priceColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_PRICE);
         int unitsColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_UNITS);
-        int suplierColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_SUPLIER);
+        int supplierColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_SUPPLIER);
         int emailColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_EMAIL);
 
 
@@ -64,7 +64,7 @@ public class ItemCursorAdapter extends CursorAdapter {
         String category = cursor.getString(categoryColumnIndex);
         String price = cursor.getString(priceColumnIndex);
         String units = cursor.getString(unitsColumnIndex);
-        String supplier = cursor.getString(suplierColumnIndex);
+        String supplier = cursor.getString(supplierColumnIndex);
         String email = cursor.getString(emailColumnIndex);
 
 
@@ -95,7 +95,7 @@ public class ItemCursorAdapter extends CursorAdapter {
         categoryTextView.setText(category);
         priceTextView.setText(price);
         unitsTextView.setText(units);
-        suplierTextView.setText(supplier);
+        supplierTextView.setText(supplier);
         emailTextView.setText(email);
 
 

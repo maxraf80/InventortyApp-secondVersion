@@ -33,6 +33,8 @@ import java.io.InputStream;
 
 import udacity.com.inventortyapp.data.ItemContract;
 
+import static udacity.com.inventortyapp.R.id.supplier;
+
 public class EditorActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final String LOG_TAG = EditorActivity.class.getSimpleName();
@@ -82,7 +84,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         mCategorySpinner = (Spinner) findViewById(R.id.spinner_zone);
         mPriceText = (EditText) findViewById(R.id.price);
         mUnitsText=(EditText)findViewById(R.id.units);
-        mSupplierText = (EditText) findViewById(R.id.suplier);
+        mSupplierText = (EditText) findViewById(supplier);
         mEmailText = (EditText) findViewById(R.id.email);
 
         mNameEditText.setOnTouchListener(mTouchListener);
@@ -145,12 +147,12 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         String referenceString = mReferenceText.getText().toString().trim();
         String priceString = mPriceText.getText().toString().trim();
         String unitString = mUnitsText.getText().toString().trim();
-        String suplierString = mSupplierText.getText().toString().trim();
+        String supplierString = mSupplierText.getText().toString().trim();
         String photoString = mUriPhoto.toString();
         String emailString = mEmailText.getText().toString().trim();
 
         if (mCurrentItemUri == null && TextUtils.isEmpty(nameString) && TextUtils.isEmpty(referenceString) &&
-                TextUtils.isEmpty(priceString) && TextUtils.isEmpty(unitString) && TextUtils.isEmpty(suplierString)
+                TextUtils.isEmpty(priceString) && TextUtils.isEmpty(unitString) && TextUtils.isEmpty(supplierString)
                 && TextUtils.isEmpty(emailString) && mCategory == ItemContract.ItemEntry.CATEGORY_UNKNOWN) {
             return;
         }
@@ -162,7 +164,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         values.put(ItemContract.ItemEntry.COLUMN_ITEM_CATEGORY, mCategory);
         values.put(ItemContract.ItemEntry.COLUMN_ITEM_PRICE, priceString);
         values.put(ItemContract.ItemEntry.COLUMN_ITEM_UNITS, unitString);
-        values.put(ItemContract.ItemEntry.COLUMN_ITEM_SUPLIER, suplierString);
+        values.put(ItemContract.ItemEntry.COLUMN_ITEM_SUPPLIER, supplierString);
         values.put(ItemContract.ItemEntry.COLUMN_ITEM_PHOTO,photoString);
         values.put(ItemContract.ItemEntry.COLUMN_ITEM_EMAIL, emailString);
 
@@ -271,7 +273,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 ItemContract.ItemEntry.COLUMN_ITEM_REFERENCE,
                 ItemContract.ItemEntry.COLUMN_ITEM_PRODUCT,
                 ItemContract.ItemEntry.COLUMN_ITEM_UNITS,
-                ItemContract.ItemEntry.COLUMN_ITEM_SUPLIER,
+                ItemContract.ItemEntry.COLUMN_ITEM_SUPPLIER,
                 ItemContract.ItemEntry.COLUMN_ITEM_EMAIL};
 
     Cursor cursor = getContentResolver().query(mCurrentItemUri,projection,null,null,null);
@@ -328,7 +330,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 ItemContract.ItemEntry.COLUMN_ITEM_PRICE,
                 ItemContract.ItemEntry.COLUMN_ITEM_UNITS,
                 ItemContract.ItemEntry.COLUMN_ITEM_PHOTO,
-                ItemContract.ItemEntry.COLUMN_ITEM_SUPLIER,
+                ItemContract.ItemEntry.COLUMN_ITEM_SUPPLIER,
                 ItemContract.ItemEntry.COLUMN_ITEM_EMAIL};
 
 
@@ -352,7 +354,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             int categoryColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_CATEGORY);
             int priceColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_PRICE);
             int unitsColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_UNITS);
-            int suplierColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_PRICE);
+            int supplierColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_PRICE);
             int emailColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_EMAIL);
             int photoColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_PHOTO);
 
@@ -361,7 +363,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             int category = cursor.getInt(categoryColumnIndex);
             int price = cursor.getInt(priceColumnIndex);
             int units = cursor.getInt(unitsColumnIndex);
-            String suplier = cursor.getString(suplierColumnIndex);
+            String supplier = cursor.getString(supplierColumnIndex);
             String email = cursor.getString(emailColumnIndex);
             String photo = cursor.getString(photoColumnIndex);
 
@@ -369,7 +371,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             mReferenceText.setText(Integer.toString(reference));
             mPriceText.setText(Integer.toString(price));
             mUnitsText.setText(Integer.toString(units));
-            mSupplierText.setText(suplier);
+            mSupplierText.setText(supplier);
             mEmailText.setText(email);
             mImageView2.setImageURI(Uri.parse(photo));
 
