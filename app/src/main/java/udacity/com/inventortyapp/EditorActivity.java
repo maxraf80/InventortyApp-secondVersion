@@ -146,6 +146,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         String priceString = mPriceText.getText().toString().trim();
         String unitString = mUnitsText.getText().toString().trim();
         String suplierString = mSupplierText.getText().toString().trim();
+        String photoString = mUriPhoto.toString();
         String emailString = mEmailText.getText().toString().trim();
 
         if (mCurrentItemUri == null && TextUtils.isEmpty(nameString) && TextUtils.isEmpty(referenceString) &&
@@ -162,6 +163,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         values.put(ItemContract.ItemEntry.COLUMN_ITEM_PRICE, priceString);
         values.put(ItemContract.ItemEntry.COLUMN_ITEM_UNITS, unitString);
         values.put(ItemContract.ItemEntry.COLUMN_ITEM_SUPLIER, suplierString);
+        values.put(ItemContract.ItemEntry.COLUMN_ITEM_PHOTO,photoString);
         values.put(ItemContract.ItemEntry.COLUMN_ITEM_EMAIL, emailString);
 
         int price = 0;
