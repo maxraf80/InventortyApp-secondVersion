@@ -289,8 +289,9 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
 
     public void writeEmail(String emailAddress, String subject, String message) {
-        Intent intent = new Intent(Intent.ACTION_SEND);
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
         intent.setType("text/html");
+        intent.setData(Uri.parse("mailto:"));
         intent.putExtra(Intent.EXTRA_EMAIL, new String [] {emailAddress});
         intent.putExtra(Intent.EXTRA_SUBJECT, subject);
         intent.putExtra(Intent.EXTRA_TEXT, message);
