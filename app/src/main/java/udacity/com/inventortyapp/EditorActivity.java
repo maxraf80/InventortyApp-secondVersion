@@ -149,7 +149,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         String unitString = mUnitsText.getText().toString().trim();
         String supplierString = mSupplierText.getText().toString().trim();
         String photoString = mUriPhoto.toString();
-
+        
         String emailString = mEmailText.getText().toString().trim();
 
         if (mCurrentItemUri == null && TextUtils.isEmpty(nameString) && TextUtils.isEmpty(referenceString) &&
