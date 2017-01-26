@@ -368,7 +368,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             mUnitsText.setText(Integer.toString(units));
             mSupplierText.setText(suplier);
             mEmailText.setText(email);
-            mImageView2.Uri
+            mImageView2.setImageURI(Uri.parse(photo));
 
             switch (category) {
                 case ItemContract.ItemEntry.CATEGORY_UNKNOWN:
