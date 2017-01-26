@@ -23,7 +23,6 @@ public class ItemCursorAdapter extends CursorAdapter {
 
 
     private int mRowsAffected;
-    private String mQuantitySold;
     private Context mContext;
 
 
