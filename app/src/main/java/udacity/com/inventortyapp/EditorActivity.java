@@ -351,7 +351,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             int unitsColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_UNITS);
             int suplierColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_PRICE);
             int emailColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_EMAIL);
-            //int photoColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_PHOTO);
+            int photoColumnIndex = cursor.getColumnIndex(ItemContract.ItemEntry.COLUMN_ITEM_PHOTO);
 
             String product = cursor.getString(productColumnIndex);
             int reference = cursor.getInt(referenceColumnIndex);
@@ -360,6 +360,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             int units = cursor.getInt(unitsColumnIndex);
             String suplier = cursor.getString(suplierColumnIndex);
             String email = cursor.getString(emailColumnIndex);
+            String photo = cursor.getString(photoColumnIndex);
 
             mNameEditText.setText(product);
             mReferenceText.setText(Integer.toString(reference));
@@ -367,6 +368,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             mUnitsText.setText(Integer.toString(units));
             mSupplierText.setText(suplier);
             mEmailText.setText(email);
+            mImageView2.Uri
 
             switch (category) {
                 case ItemContract.ItemEntry.CATEGORY_UNKNOWN:
