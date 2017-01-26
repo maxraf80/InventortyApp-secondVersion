@@ -90,15 +90,15 @@ public class ItemProvider extends ContentProvider {
         Integer units = Integer.parseInt(values.getAsString(ItemContract.ItemEntry.COLUMN_ITEM_UNITS));
         if (units <0) {  throw new IllegalArgumentException("Units needs to be defined");   }
 
-        String suplier = values.getAsString(ItemContract.ItemEntry.COLUMN_ITEM_SUPPLIER);
-        if (suplier == null) {
+        String supplier = values.getAsString(ItemContract.ItemEntry.COLUMN_ITEM_SUPPLIER);
+        if (supplier == null) {
             throw new IllegalArgumentException("Suplier cannot be an empty field");
         }
 
-        String photo = values.getAsString(ItemContract.ItemEntry.COLUMN_ITEM_PHOTO);
+   /*     String photo = values.getAsString(ItemContract.ItemEntry.COLUMN_ITEM_PHOTO);
         if (photo == null) {
             throw new IllegalArgumentException("Item needs a photo");
-        }
+        }*/
 
         String email = values.getAsString(ItemContract.ItemEntry.COLUMN_ITEM_SUPPLIER);
         if (email == null) {
@@ -158,23 +158,17 @@ public class ItemProvider extends ContentProvider {
 
 
         if (values.containsKey((ItemContract.ItemEntry.COLUMN_ITEM_SUPPLIER))) {
-            String suplier = values.getAsString(ItemContract.ItemEntry.COLUMN_ITEM_SUPPLIER);
-            if (suplier == null) {
-                throw new IllegalArgumentException("Suplier needs to be defined");
+            String supplier = values.getAsString(ItemContract.ItemEntry.COLUMN_ITEM_SUPPLIER);
+            if (supplier == null) {
+                throw new IllegalArgumentException("Supplier needs to be defined");
             }
         }
 
-        if (values.containsKey((ItemContract.ItemEntry.COLUMN_ITEM_PHOTO))) {
-            String photo = values.getAsString(ItemContract.ItemEntry.COLUMN_ITEM_PHOTO);
-            if (photo == null) {
-                throw new IllegalArgumentException("Item needs a photo");
-            }
-        }
 
         if (values.containsKey((ItemContract.ItemEntry.COLUMN_ITEM_EMAIL))) {
             String email = values.getAsString(ItemContract.ItemEntry.COLUMN_ITEM_EMAIL);
             if (email == null) {
-                throw new IllegalArgumentException("Suplier needs to be defined");
+                throw new IllegalArgumentException("Email needs to be defined");
             }
         }
 

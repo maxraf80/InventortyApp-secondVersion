@@ -1,4 +1,5 @@
 package udacity.com.inventortyapp;
+
 import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.ContentValues;
@@ -27,12 +28,14 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
 import udacity.com.inventortyapp.data.ItemContract;
 
+import static udacity.com.inventortyapp.R.id.photo;
 import static udacity.com.inventortyapp.R.id.supplier;
 
 public class EditorActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -45,7 +48,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     private Uri mCurrentItemUri;
     private Uri mUriPhoto;
     private TextView mTextView;
-
     private ImageView mImageView;
     private ImageView mImageView2;
     private ImageView mOrderView;
@@ -98,7 +100,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
 
 
-        mImageView = (ImageView) findViewById(R.id.photo); // Cámara de fotos
+        mImageView = (ImageView) findViewById(photo); // Cámara de fotos
         mImageView2 = (ImageView) findViewById(R.id.productImage); // Prefoto seleccionada por la cámara
         mTextView = (TextView) findViewById(R.id.image_uri);  // Ruta de acceso
 
@@ -149,7 +151,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         String unitString = mUnitsText.getText().toString().trim();
         String supplierString = mSupplierText.getText().toString().trim();
         String photoString = mUriPhoto.toString();
-        
         String emailString = mEmailText.getText().toString().trim();
 
         if (mCurrentItemUri == null && TextUtils.isEmpty(nameString) && TextUtils.isEmpty(referenceString) &&
@@ -373,7 +374,8 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             int units = cursor.getInt(unitsColumnIndex);
             String supplier = cursor.getString(supplierColumnIndex);
             String email = cursor.getString(emailColumnIndex);
-            String photo = cursor.getString(photoColumnIndex);
+            String  photo = cursor.getString(photoColumnIndex);
+            mUriPhoto = Uri.parse(cursor.getString(photoColumnIndex));
 
             mNameEditText.setText(product);
             mReferenceText.setText(Integer.toString(reference));
