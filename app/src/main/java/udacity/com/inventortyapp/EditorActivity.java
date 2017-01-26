@@ -149,10 +149,11 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         String unitString = mUnitsText.getText().toString().trim();
         String supplierString = mSupplierText.getText().toString().trim();
         String photoString = mUriPhoto.toString();
+
         String emailString = mEmailText.getText().toString().trim();
 
         if (mCurrentItemUri == null && TextUtils.isEmpty(nameString) && TextUtils.isEmpty(referenceString) &&
-                TextUtils.isEmpty(priceString) && TextUtils.isEmpty(unitString) && TextUtils.isEmpty(supplierString)
+                TextUtils.isEmpty(priceString) && TextUtils.isEmpty(unitString)&&TextUtils.isEmpty(photoString)&& TextUtils.isEmpty(supplierString)
                 && TextUtils.isEmpty(emailString) && mCategory == ItemContract.ItemEntry.CATEGORY_UNKNOWN) {
             return;
         }
@@ -179,6 +180,13 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             units = Integer.parseInt(unitString);
         }
         values.put(ItemContract.ItemEntry.COLUMN_ITEM_UNITS, units);
+
+
+        String photo = "";
+        if (!TextUtils.isEmpty(photo)){
+            photo = photoString;
+            values.put(ItemContract.ItemEntry.COLUMN_ITEM_PHOTO, photo);
+        }
 
         if (mCurrentItemUri == null) {
             Uri newUri = getContentResolver().insert(ItemContract.ItemEntry.CONTENT_URI, values);
