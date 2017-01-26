@@ -8,7 +8,7 @@ public class ItemDbHelper extends SQLiteOpenHelper {
     public static final String LOG_TAG = ItemDbHelper.class.getSimpleName();
 
     private static final String DATABSE_NAME = "shelter.db";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     public ItemDbHelper(Context context) {
         super(context, DATABSE_NAME, null, DATABASE_VERSION);
@@ -34,6 +34,7 @@ public class ItemDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS table_name");
 
     }
 }
