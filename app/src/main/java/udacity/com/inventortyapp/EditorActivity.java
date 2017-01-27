@@ -58,6 +58,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     private EditText mUnitsText;
     private EditText mSupplierText;
     private EditText mEmailText;
+
     private int mCategory = ItemContract.ItemEntry.CATEGORY_UNKNOWN;
     private boolean mItemHasChanged = false;
 
@@ -72,15 +73,18 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
         Intent intent = getIntent();
         mCurrentItemUri = intent.getData();
-        mOrderView.setVisibility(View.INVISIBLE);
+
 
         if (mCurrentItemUri == null) {
             setTitle(getString(R.string.editor_activity_title_new_item));
+
             invalidateOptionsMenu();
 
         } else {
             setTitle(getString(R.string.editor_activity_title_edit_item));
             getLoaderManager().initLoader(EXISTING_ITEM_LOADER, null, this);
+
+
         }
 
         mNameEditText = (EditText) findViewById(R.id.edit_activity_name);
@@ -112,6 +116,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
 
         mOrderView = (ImageView) findViewById(R.id.action_sendmail);
+        mOrderView.setVisibility(View.INVISIBLE);
         mOrderView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {sendEmail(); }});
@@ -158,9 +163,10 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
         if (mCurrentItemUri == null && TextUtils.isEmpty(nameString) || TextUtils.isEmpty(referenceString) ||
                 TextUtils.isEmpty(priceString) || TextUtils.isEmpty(unitString)&&TextUtils.isEmpty(photoString)|| TextUtils.isEmpty(supplierString)
-                || TextUtils.isEmpty(emailString) ) {
+                || TextUtils.isEmpty(emailString) ||mUriPhoto==null ) {
         Toast.makeText(this, getString(R.string.editor_insert_item_empty), Toast.LENGTH_LONG).show();
-            return;
+             return;
+
         }
 
 
@@ -216,6 +222,8 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_editor, menu);
+        if(mCurrentItemUri!=null){mOrderView.setVisibility(View.VISIBLE);}
+
         return true;
     }
 

@@ -95,10 +95,6 @@ public class ItemProvider extends ContentProvider {
             throw new IllegalArgumentException("Suplier cannot be an empty field");
         }
 
-   /*     String photo = values.getAsString(ItemContract.ItemEntry.COLUMN_ITEM_PHOTO);
-        if (photo == null) {
-            throw new IllegalArgumentException("Item needs a photo");
-        }*/
 
         String email = values.getAsString(ItemContract.ItemEntry.COLUMN_ITEM_SUPPLIER);
         if (email == null) {
