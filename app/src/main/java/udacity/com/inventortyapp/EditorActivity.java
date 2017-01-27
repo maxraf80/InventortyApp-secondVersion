@@ -72,10 +72,12 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
         Intent intent = getIntent();
         mCurrentItemUri = intent.getData();
+        mOrderView.setVisibility(View.INVISIBLE);
 
         if (mCurrentItemUri == null) {
             setTitle(getString(R.string.editor_activity_title_new_item));
             invalidateOptionsMenu();
+
         } else {
             setTitle(getString(R.string.editor_activity_title_edit_item));
             getLoaderManager().initLoader(EXISTING_ITEM_LOADER, null, this);
@@ -106,6 +108,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
         mImageView.setOnClickListener(new View.OnClickListener() {
         @Override public void onClick(View view) { openImageSelector(); }});
+
 
 
         mOrderView = (ImageView) findViewById(R.id.action_sendmail);
@@ -153,9 +156,10 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         String photoString = mUriPhoto.toString();
         String emailString = mEmailText.getText().toString().trim();
 
-        if (mCurrentItemUri == null && TextUtils.isEmpty(nameString) && TextUtils.isEmpty(referenceString) &&
-                TextUtils.isEmpty(priceString) && TextUtils.isEmpty(unitString)&&TextUtils.isEmpty(photoString)&& TextUtils.isEmpty(supplierString)
-                && TextUtils.isEmpty(emailString) && mCategory == ItemContract.ItemEntry.CATEGORY_UNKNOWN) {
+        if (mCurrentItemUri == null && TextUtils.isEmpty(nameString) || TextUtils.isEmpty(referenceString) ||
+                TextUtils.isEmpty(priceString) || TextUtils.isEmpty(unitString)&&TextUtils.isEmpty(photoString)|| TextUtils.isEmpty(supplierString)
+                || TextUtils.isEmpty(emailString) ) {
+        Toast.makeText(this, getString(R.string.editor_insert_item_empty), Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -187,6 +191,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         if (!TextUtils.isEmpty(photo)){
             photo = photoString;
             values.put(ItemContract.ItemEntry.COLUMN_ITEM_PHOTO, photo);
+
         }
 
         if (mCurrentItemUri == null) {
