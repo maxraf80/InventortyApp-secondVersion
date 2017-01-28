@@ -63,13 +63,18 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     private boolean mItemHasChanged = false;
 
     private View.OnTouchListener mTouchListener = new View.OnTouchListener() {
-   @Override public boolean onTouch(View view, MotionEvent motionEvent) {
-            mItemHasChanged = true;  return false; }};
+        @Override
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+            mItemHasChanged = true;
+            return false;
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_habit);
+        mUriPhoto = Uri.parse("android.resource://udacity.com.inventortyapp/" + (R.drawable.what_you_need_know_managing));
 
         Intent intent = getIntent();
         mCurrentItemUri = intent.getData();
@@ -91,7 +96,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         mReferenceText = (EditText) findViewById(R.id.edit_bar_code);
         mCategorySpinner = (Spinner) findViewById(R.id.spinner_zone);
         mPriceText = (EditText) findViewById(R.id.price);
-        mUnitsText=(EditText)findViewById(R.id.units);
+        mUnitsText = (EditText) findViewById(R.id.units);
         mSupplierText = (EditText) findViewById(supplier);
         mEmailText = (EditText) findViewById(R.id.email);
 
@@ -104,31 +109,36 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         mEmailText.setOnTouchListener(mTouchListener);
 
 
-
-
         mImageView = (ImageView) findViewById(photo); // Cámara de fotos
         mImageView2 = (ImageView) findViewById(R.id.productImage); // Prefoto seleccionada por la cámara
         mTextView = (TextView) findViewById(R.id.image_uri);  // Ruta de acceso
 
         mImageView.setOnClickListener(new View.OnClickListener() {
-        @Override public void onClick(View view) { openImageSelector(); }});
-
+            @Override
+            public void onClick(View view) {
+                openImageSelector();
+            }
+        });
 
 
         mOrderView = (ImageView) findViewById(R.id.action_sendmail);
         mOrderView.setVisibility(View.INVISIBLE);
         mOrderView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {sendEmail(); }});
+            public void onClick(View view) {
+                sendEmail();
+            }
+        });
 
-        setupSpinner();}
+        setupSpinner();
+    }
 
     private void setupSpinner() {
-    ArrayAdapter kindSpinnerAdapter = ArrayAdapter.createFromResource(this, R.array.array_category_options,
-    android.R.layout.simple_spinner_item);
-    kindSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-    mCategorySpinner.setAdapter(kindSpinnerAdapter);
-    mCategorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        ArrayAdapter kindSpinnerAdapter = ArrayAdapter.createFromResource(this, R.array.array_category_options,
+                android.R.layout.simple_spinner_item);
+        kindSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        mCategorySpinner.setAdapter(kindSpinnerAdapter);
+        mCategorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
                 String selection = (String) parent.getItemAtPosition(i);
@@ -146,13 +156,20 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                     } else if (selection.equals(getString(R.string.category_fruit))) {
                         mCategory = ItemContract.ItemEntry.CATEGORY_FRUIT;
                     } else {
-                        mCategory = ItemContract.ItemEntry.CATEGORY_FISH; }}}
+                        mCategory = ItemContract.ItemEntry.CATEGORY_FISH;
+                    }
+                }
+            }
+
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
                 mCategory = ItemContract.ItemEntry.CATEGORY_UNKNOWN;
-            }});}
+            }
+        });
+    }
 
     private void saveItem() {
+
         String nameString = mNameEditText.getText().toString().trim();
         String referenceString = mReferenceText.getText().toString().trim();
         String priceString = mPriceText.getText().toString().trim();
@@ -162,10 +179,10 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         String emailString = mEmailText.getText().toString().trim();
 
         if (mCurrentItemUri == null && TextUtils.isEmpty(nameString) || TextUtils.isEmpty(referenceString) ||
-                TextUtils.isEmpty(priceString) || TextUtils.isEmpty(unitString)&&TextUtils.isEmpty(photoString)|| TextUtils.isEmpty(supplierString)
-                || TextUtils.isEmpty(emailString) ||mUriPhoto==null ) {
-        Toast.makeText(this, getString(R.string.editor_insert_item_empty), Toast.LENGTH_LONG).show();
-             return;
+                TextUtils.isEmpty(priceString) || TextUtils.isEmpty(unitString) || TextUtils.isEmpty(supplierString)
+                || TextUtils.isEmpty(emailString) || mUriPhoto == null) {
+            Toast.makeText(this, getString(R.string.editor_insert_item_empty), Toast.LENGTH_LONG).show();
+            return;
 
         }
 
@@ -178,6 +195,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         values.put(ItemContract.ItemEntry.COLUMN_ITEM_UNITS, unitString);
         values.put(ItemContract.ItemEntry.COLUMN_ITEM_SUPPLIER, supplierString);
         values.put(ItemContract.ItemEntry.COLUMN_ITEM_PHOTO,photoString);
+        values.put(ItemContract.ItemEntry.COLUMN_ITEM_PHOTO, photoString);
         values.put(ItemContract.ItemEntry.COLUMN_ITEM_EMAIL, emailString);
 
         int price = 0;
@@ -194,7 +212,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
 
         String photo = "";
-        if (!TextUtils.isEmpty(photo)){
+        if (!TextUtils.isEmpty(photo)) {
             photo = photoString;
             values.put(ItemContract.ItemEntry.COLUMN_ITEM_PHOTO, photo);
 
@@ -222,7 +240,9 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_editor, menu);
-        if(mCurrentItemUri!=null){mOrderView.setVisibility(View.VISIBLE);}
+        if (mCurrentItemUri != null) {
+            mOrderView.setVisibility(View.VISIBLE);
+        }
 
         return true;
     }
@@ -271,7 +291,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                     return true;
                 }
                 DialogInterface.OnClickListener discardButtonClickListener =
-                new DialogInterface.OnClickListener() {
+                        new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 NavUtils.navigateUpFromSameTask(EditorActivity.this);
@@ -298,30 +318,33 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 ItemContract.ItemEntry.COLUMN_ITEM_SUPPLIER,
                 ItemContract.ItemEntry.COLUMN_ITEM_EMAIL};
 
-    Cursor cursor = getContentResolver().query(mCurrentItemUri,projection,null,null,null);
-    if (cursor.moveToFirst()){
+        Cursor cursor = getContentResolver().query(mCurrentItemUri, projection, null, null, null);
+        if (cursor.moveToFirst()) {
 
-    String productName = cursor.getString(cursor.getColumnIndexOrThrow(ItemContract.ItemEntry.COLUMN_ITEM_PRODUCT));
-    String productReference=((getString(R.string.email_message_name)) +" "+  cursor.getString(cursor.getColumnIndexOrThrow(ItemContract.ItemEntry.COLUMN_ITEM_REFERENCE)));
-    String emailAddress = cursor.getString(cursor.getColumnIndexOrThrow(ItemContract.ItemEntry.COLUMN_ITEM_EMAIL));
-    String productSubject= cursor.getString(cursor.getColumnIndexOrThrow(ItemContract.ItemEntry.COLUMN_ITEM_REFERENCE));
-    String subject = (getString(R.string.orderSubject)+ " " + productSubject);
-    String body= (getString(R.string.genericMessageBeggining)+ " " + productName +"  " +productReference + "\n" + "\n" + (getString(R.string.genericMessageMiddle)) + "\n"+ "\n" +(getString(R.string.genericMessageEnd)));
+            String productName = cursor.getString(cursor.getColumnIndexOrThrow(ItemContract.ItemEntry.COLUMN_ITEM_PRODUCT));
+            String productReference = ((getString(R.string.email_message_name)) + " " + cursor.getString(cursor.getColumnIndexOrThrow(ItemContract.ItemEntry.COLUMN_ITEM_REFERENCE)));
+            String emailAddress = cursor.getString(cursor.getColumnIndexOrThrow(ItemContract.ItemEntry.COLUMN_ITEM_EMAIL));
+            String productSubject = cursor.getString(cursor.getColumnIndexOrThrow(ItemContract.ItemEntry.COLUMN_ITEM_REFERENCE));
+            String subject = (getString(R.string.orderSubject) + " " + productSubject);
+            String body = (getString(R.string.genericMessageBeggining) + " " + productName + "  " + productReference + "\n" + "\n" + (getString(R.string.genericMessageMiddle)) + "\n" + "\n" + (getString(R.string.genericMessageEnd)));
 
-        writeEmail(emailAddress, subject, body);
-        Log.e(LOG_TAG, "Item Sold button was pressed" + emailAddress);
-    }}
-
+            writeEmail(emailAddress, subject, body);
+            Log.e(LOG_TAG, "Item Sold button was pressed" + emailAddress);
+        }
+    }
 
 
     public void writeEmail(String emailAddress, String subject, String message) {
         Intent intent = new Intent(Intent.ACTION_SENDTO);
         intent.setType("text/html");
         intent.setData(Uri.parse("mailto:"));
-        intent.putExtra(Intent.EXTRA_EMAIL, new String [] {emailAddress});
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{emailAddress});
         intent.putExtra(Intent.EXTRA_SUBJECT, subject);
         intent.putExtra(Intent.EXTRA_TEXT, message);
-        if (intent.resolveActivity(getPackageManager()) != null) { startActivity(Intent.createChooser(intent, "Send Email")); } }
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(Intent.createChooser(intent, "Send Email"));
+        }
+    }
 
 
     @Override
@@ -387,7 +410,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             int units = cursor.getInt(unitsColumnIndex);
             String supplier = cursor.getString(supplierColumnIndex);
             String email = cursor.getString(emailColumnIndex);
-            String  photo = cursor.getString(photoColumnIndex);
+            String photo = cursor.getString(photoColumnIndex);
             mUriPhoto = Uri.parse(cursor.getString(photoColumnIndex));
 
             mNameEditText.setText(product);
@@ -545,7 +568,9 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 Toast.makeText(this, getString(R.string.editor_delete_item_failed), Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, getString(R.string.editor_delete_item_ok), Toast.LENGTH_SHORT).show();
-            }}
-        finish(); }
-
+            }
+        }
+        finish();
     }
+
+}
