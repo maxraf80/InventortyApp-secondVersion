@@ -49,4 +49,6 @@
     <string name="email_message_units">\\nProduct Quantity:</string>
     <string name="email_message_name">Product reference :</string>
     <string name="editor_insert_item_empty">All refeferences have to be set to save the product</string>
+    <string name="empty_View">Your Warehouse List is empty</string>
+    <string name="explanation">Press \"new\" button to add a product</string>
 </resources>
